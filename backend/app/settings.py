@@ -1,5 +1,11 @@
+from pathlib import Path
+
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+# Get the directory where this settings.py file is located
+_BASE_DIR = Path(__file__).resolve().parent
 
 
 class Settings(BaseSettings):
@@ -31,6 +37,8 @@ class Settings(BaseSettings):
     db_password: str = Field(default="postgres", alias="DB_PASSWORD")
 
     model_config = SettingsConfigDict(
+        env_file=_BASE_DIR / ".env.secret",
+        env_file_encoding="utf-8",
         case_sensitive=True,
         extra="allow",
     )

@@ -4,6 +4,7 @@ services:
     restart: unless-stopped
     ports:
       - ${APP_HOST_ADDRESS:?'APP_HOST_ADDRESS is required'}:${APP_HOST_PORT:?'APP_HOST_PORT is required'}:${APP_CONTAINER_PORT}
+      - ${APP_HOST_ADDRESS:?'APP_HOST_ADDRESS is required'}:42000:${APP_CONTAINER_PORT}
     expose:
       - ${APP_CONTAINER_PORT}
     environment:
