@@ -1,9 +1,42 @@
 # See wiki/caddy.md
 
 :{$CADDY_CONTAINER_PORT} {
-    handle {
+    root * /srv
+    file_server
+
+    handle /analytics/* {
         reverse_proxy http://app:{$APP_CONTAINER_PORT} {
             header_up Authorization {http.request.header.Authorization}
         }
+    }
+
+    handle /items/* {
+        reverse_proxy http://app:{$APP_CONTAINER_PORT} {
+            header_up Authorization {http.request.header.Authorization}
+        }
+    }
+
+    handle /learners/* {
+        reverse_proxy http://app:{$APP_CONTAINER_PORT} {
+            header_up Authorization {http.request.header.Authorization}
+        }
+    }
+
+    handle /interactions/* {
+        reverse_proxy http://app:{$APP_CONTAINER_PORT} {
+            header_up Authorization {http.request.header.Authorization}
+        }
+    }
+
+    handle /docs/* {
+        reverse_proxy http://app:{$APP_CONTAINER_PORT}
+    }
+
+    handle /openapi.json {
+        reverse_proxy http://app:{$APP_CONTAINER_PORT}
+    }
+
+    handle {
+        try_files {path} /index.html
     }
 }
