@@ -5,6 +5,7 @@ Students implement the analytics endpoints to make these tests pass.
 Run with: uv run poe test
 """
 
+
 import pytest
 from datetime import datetime
 from httpx import ASGITransport, AsyncClient
